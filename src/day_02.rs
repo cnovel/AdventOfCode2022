@@ -35,31 +35,27 @@ fn compute_line_score_part_1(l: &str) -> i32 {
     return s;
 }
 
-fn compute_line_score_part_2(l: &str) -> i32 {    
-    let mut scores = HashMap::new();
-    scores.insert(String::from("A X"), 3 + 0);
-    scores.insert(String::from("A Y"), 1 + 3);
-    scores.insert(String::from("A Z"), 2 + 6);
-    scores.insert(String::from("B X"), 1 + 0);
-    scores.insert(String::from("B Y"), 2 + 3);
-    scores.insert(String::from("B Z"), 3 + 6);
-    scores.insert(String::from("C X"), 2 + 0);
-    scores.insert(String::from("C Y"), 3 + 3);
-    scores.insert(String::from("C Z"), 1 + 6);
-
-    return scores[l];
-}
-
 fn solve(p: &str, s: &str) {    
     println!("Solving Day 02 - {}", s);
     let mut score_1 = 0;
     let mut score_2 = 0;
 
+    let mut scores_2_map = HashMap::new();
+    scores_2_map.insert(String::from("A X"), 3 + 0);
+    scores_2_map.insert(String::from("A Y"), 1 + 3);
+    scores_2_map.insert(String::from("A Z"), 2 + 6);
+    scores_2_map.insert(String::from("B X"), 1 + 0);
+    scores_2_map.insert(String::from("B Y"), 2 + 3);
+    scores_2_map.insert(String::from("B Z"), 3 + 6);
+    scores_2_map.insert(String::from("C X"), 2 + 0);
+    scores_2_map.insert(String::from("C Y"), 3 + 3);
+    scores_2_map.insert(String::from("C Z"), 1 + 6);
+
     let contents = fs::read_to_string(&p)
         .expect("Should have been able to read the file");
     for l in contents.split("\n") {
         score_1 += compute_line_score_part_1(l.trim());
-        score_2 += compute_line_score_part_2(l.trim());
+        score_2 += scores_2_map[l.trim()];
     }
 
     println!("Score 1: {}", score_1);

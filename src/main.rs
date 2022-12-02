@@ -36,4 +36,9 @@ fn main() {
         times.push(t);
         println!("----------");
     }
+
+    println!("Took {:.3}s for {} days [{:.3}s avg]", 
+        times.iter().sum::<f64>(),
+        times.len(),
+        times.iter().sum::<f64>() / times.len() as f64);
 }
