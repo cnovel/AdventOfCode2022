@@ -1,13 +1,9 @@
 use std::fs;
 
-struct Problem {
-    input_path: String
-}
-
-fn solve(p: &Problem, s: &str) {
+fn solve(p: &str, s: &str) {
     println!("Solving Day 01 - {}", s);
 
-    let contents = fs::read_to_string(&p.input_path)
+    let contents = fs::read_to_string(&p)
         .expect("Should have been able to read the file");
 
     let mut max_calories_per_elf: Vec<i32> = Vec::new(); 
@@ -29,16 +25,9 @@ fn solve(p: &Problem, s: &str) {
     println!("Max calories for the three best elves: {} [{} + {} + {}]", 
         max_calories_per_elf[0] + max_calories_per_elf[1] + max_calories_per_elf[2],
         max_calories_per_elf[0], max_calories_per_elf[1], max_calories_per_elf[2]);
-    println!("----------");
 }
 
 pub fn solve_all() {
-    let p_ex = Problem {
-        input_path: "inputs/day_01_example_1.txt".to_string()
-    };
-    solve(&p_ex, "Example");
-    let p = Problem {
-        input_path: "inputs/day_01.txt".to_string()
-    };
-    solve(&p, "Main");
+    solve("inputs/day_01_example_1.txt", "Example");
+    solve("inputs/day_01.txt", "Main");
 }
