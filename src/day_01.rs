@@ -22,9 +22,9 @@ fn solve(p: &str, s: &str) {
     max_calories_per_elf.sort();
     max_calories_per_elf.reverse();
     println!("Max calories for the best elf: {}", max_calories_per_elf[0]);
-    println!("Max calories for the three best elves: {} [{} + {} + {}]", 
-        max_calories_per_elf[0] + max_calories_per_elf[1] + max_calories_per_elf[2],
-        max_calories_per_elf[0], max_calories_per_elf[1], max_calories_per_elf[2]);
+    println!("Max calories for the three best elves: {} [{}]", 
+        max_calories_per_elf[0..3].iter().sum::<i32>(),
+        max_calories_per_elf[0..3].iter().map( |&id| id.to_string()).collect::<Vec<String>>().join(" + "));
 }
 
 pub fn solve_all() {
