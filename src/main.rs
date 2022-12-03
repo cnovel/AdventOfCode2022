@@ -22,22 +22,17 @@ fn main() {
 
     let days = [day_01::solve_all, day_02::solve_all, day_03::solve_all];
 
-    if day == 0 {
-        let mut d = 1;
-        for f in days.iter() {
-            let now = time::Instant::now();
-            f();
-            let t = now.elapsed().as_secs_f64();
-            println!("Day {} solved in {:.3}s", d, t);
-            times.push(t);
-            println!("----------");
-            d += 1;
+    
+    let mut d = 0;
+    for f in days.iter() {
+        d += 1;
+        if day != 0 && d != day {
+            continue;
         }
-    } else {
         let now = time::Instant::now();
-        days[day - 1]();
+        f();
         let t = now.elapsed().as_secs_f64();
-        println!("Day {} solved in {:.3}s", day, t);
+        println!("Day {} solved in {:.3}s", d, t);
         times.push(t);
         println!("----------");
     }
