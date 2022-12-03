@@ -20,33 +20,28 @@ fn main() {
         println!("----------");
     }
 
-    if day == 0 || day == 1 {
+    let days = [day_01::solve_all, day_03::solve_all, day_03::solve_all];
+
+    if day == 0 {
+        let mut d = 1;
+        for f in days.iter() {
+            let now = time::Instant::now();
+            f();
+            let t = now.elapsed().as_secs_f64();
+            println!("Day {} solved in {:.3}s", d, t);
+            times.push(t);
+            println!("----------");
+            d += 1;
+        }
+    } else {
         let now = time::Instant::now();
-        day_01::solve_all();
+        days[day - 1]();
         let t = now.elapsed().as_secs_f64();
-        println!("Day 1 solved in {:.3}s", t);
+        println!("Day {} solved in {:.3}s", day, t);
         times.push(t);
         println!("----------");
     }
-
-    if day == 0 || day == 2 {
-        let now = time::Instant::now();
-        day_02::solve_all();
-        let t = now.elapsed().as_secs_f64();
-        println!("Day 2 solved in {:.3}s", t);
-        times.push(t);
-        println!("----------");
-    }
-
-    if day == 0 || day == 3 {
-        let now = time::Instant::now();
-        day_03::solve_all();
-        let t = now.elapsed().as_secs_f64();
-        println!("Day 3 solved in {:.3}s", t);
-        times.push(t);
-        println!("----------");
-    }
-
+    
     println!("Took {:.3}s for {} days [{:.3}s avg]", 
         times.iter().sum::<f64>(),
         times.len(),
