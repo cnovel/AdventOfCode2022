@@ -20,7 +20,7 @@ fn main() {
         println!("----------");
     }
 
-    let days = [day_01::solve_all, day_03::solve_all, day_03::solve_all];
+    let days = [day_01::solve_all, day_02::solve_all, day_03::solve_all];
 
     if day == 0 {
         let mut d = 1;
@@ -41,7 +41,7 @@ fn main() {
         times.push(t);
         println!("----------");
     }
-    
+
     println!("Took {:.3}s for {} days [{:.3}s avg]", 
         times.iter().sum::<f64>(),
         times.len(),
