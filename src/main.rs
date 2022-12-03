@@ -3,6 +3,7 @@ use std::time;
 
 pub mod day_01;
 pub mod day_02;
+pub mod day_03;
 
 fn main() {
     println!("Welcome to Advent of Code 2022");
@@ -33,6 +34,15 @@ fn main() {
         day_02::solve_all();
         let t = now.elapsed().as_secs_f64();
         println!("Day 2 solved in {:.3}s", t);
+        times.push(t);
+        println!("----------");
+    }
+
+    if day == 0 || day == 3 {
+        let now = time::Instant::now();
+        day_03::solve_all();
+        let t = now.elapsed().as_secs_f64();
+        println!("Day 3 solved in {:.3}s", t);
         times.push(t);
         println!("----------");
     }
