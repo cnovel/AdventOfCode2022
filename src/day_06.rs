@@ -27,8 +27,7 @@ fn solve(p: &str, s: &str) {
 
     let lines: Vec<&str> = contents.split("\n").map(|l| l.trim()).collect();
     for l in lines {
-        println!("First marker is {}", get_first_marker(&l, 4));
-        println!("Second marker is {}", get_first_marker(&l, 14));
+        println!("First marker is {}.\tSecond marker is {}.", get_first_marker(&l, 4), get_first_marker(&l, 14));
     }
 }
 
