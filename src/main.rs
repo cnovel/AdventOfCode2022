@@ -7,6 +7,7 @@ pub mod day_03;
 pub mod day_04;
 pub mod day_05;
 pub mod day_06;
+pub mod day_07;
 
 fn main() {
     println!("Welcome to Advent of Code 2022");
@@ -24,7 +25,7 @@ fn main() {
     }
 
     let days = [day_01::solve_all, day_02::solve_all, day_03::solve_all, day_04::solve_all,
-        day_05::solve_all, day_06::solve_all];
+        day_05::solve_all, day_06::solve_all, day_07::solve_all];
 
     
     let mut d = 0;
