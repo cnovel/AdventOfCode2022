@@ -23,12 +23,12 @@ fn solve(p: &str, s: &str) {
     let mut score_2 = 0;
     for j in 0..height {
         for i in 0..width {
-            let h = trees[&(i,j)] as i32;
+            let h = trees[&(i,j)];
             let mut tree_dists: [u32; 4] = [0,0,0,0];
             let mut met_edge = false;
             for n in (0..j).rev() {
                 tree_dists[0] += 1;
-                if trees[&(i,n)] as i32 >= h {
+                if trees[&(i,n)] >= h {
                     break;
                 }
                 if n == 0 {
@@ -37,7 +37,7 @@ fn solve(p: &str, s: &str) {
             }
             for n in i+1..width {
                 tree_dists[1] += 1;
-                if trees[&(n,j)] as i32 >= h {
+                if trees[&(n,j)] >= h {
                     break;
                 }
                 if n == width - 1 {
@@ -46,7 +46,7 @@ fn solve(p: &str, s: &str) {
             }
             for n in j+1..height {
                 tree_dists[2] += 1;
-                if trees[&(i,n)] as i32 >= h {
+                if trees[&(i,n)] >= h {
                     break;
                 }
                 if n == height - 1 {
@@ -55,7 +55,7 @@ fn solve(p: &str, s: &str) {
             }            
             for n in (0..i).rev() {
                 tree_dists[3] += 1;
-                if trees[&(n,j)] as i32 >= h {
+                if trees[&(n,j)] >= h {
                     break;
                 }
                 if n == 0 {
@@ -69,7 +69,7 @@ fn solve(p: &str, s: &str) {
             score_2 = std::cmp::max(score_2, tree_dists.into_iter().reduce(|a,b| a*b).unwrap());
         }
     }
-    
+
     println!("Score 1 = {}", score_1);
     println!("Score 2 = {}", score_2);
 }
