@@ -2,7 +2,7 @@ use std::fs;
 
 fn solve(p: &str, s: &str) {
     println!("Solving Day 04 - {}", s);
-    
+
     let contents = fs::read_to_string(&p)
         .expect("Should have been able to read the file");
 

@@ -21,7 +21,7 @@ fn get_first_marker(line: &str, size: usize) -> i32{
 
 fn solve(p: &str, s: &str) {
     println!("Solving Day 06 - {}", s);
-    
+
     let contents = fs::read_to_string(&p)
         .expect("Should have been able to read the file");
 

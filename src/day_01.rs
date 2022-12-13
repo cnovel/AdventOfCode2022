@@ -6,7 +6,7 @@ fn solve(p: &str, s: &str) {
     let contents = fs::read_to_string(&p)
         .expect("Should have been able to read the file");
 
-    let mut max_calories_per_elf: Vec<i32> = Vec::new(); 
+    let mut max_calories_per_elf: Vec<i32> = Vec::new();
     let mut cur_calories = 0;
 
     for x in contents.split("\n") {
@@ -22,7 +22,7 @@ fn solve(p: &str, s: &str) {
     max_calories_per_elf.sort();
     max_calories_per_elf.reverse();
     println!("Max calories for the best elf: {}", max_calories_per_elf[0]);
-    println!("Max calories for the three best elves: {} [{}]", 
+    println!("Max calories for the three best elves: {} [{}]",
         max_calories_per_elf[0..3].iter().sum::<i32>(),
         max_calories_per_elf[0..3].iter().map( |&id| id.to_string()).collect::<Vec<String>>().join(" + "));
 }

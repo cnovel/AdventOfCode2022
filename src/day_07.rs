@@ -17,10 +17,10 @@ fn path_for_file(p: &VecDeque<&str>, s: &str) -> String {
 
 fn solve(p: &str, s: &str) {
     println!("Solving Day 07 - {}", s);
-    
+
     let contents = fs::read_to_string(&p)
         .expect("Should have been able to read the file");
-    
+
     let lines: Vec<&str> = contents.split("\n").map(|l| l.trim()).collect();
 
     let mut cur_tree = VecDeque::<&str>::new();
@@ -46,7 +46,7 @@ fn solve(p: &str, s: &str) {
         }
 
         let s: Vec<&str> = l.split(" ").collect();
-        let file_size: i32 = s[0].parse().expect("Should be a number");        
+        let file_size: i32 = s[0].parse().expect("Should be a number");
         all_files_size.insert(path_for_file(&cur_tree, s[1]), file_size);
     }
 
@@ -65,7 +65,7 @@ fn solve(p: &str, s: &str) {
         }
     }
     println!("Score 1 = {}", score_1);
-    
+
     let free_space = 70000000 - all_dirs_size["/"];
     let size_to_free = 30000000 - free_space;
     println!("Size to free: {}", size_to_free);

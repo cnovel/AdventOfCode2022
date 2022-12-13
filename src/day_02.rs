@@ -35,7 +35,7 @@ fn compute_line_score_part_1(l: &str) -> i32 {
     return s;
 }
 
-fn solve(p: &str, s: &str) {    
+fn solve(p: &str, s: &str) {
     println!("Solving Day 02 - {}", s);
     let mut score_1 = 0;
     let mut score_2 = 0;

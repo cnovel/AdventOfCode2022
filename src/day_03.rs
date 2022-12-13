@@ -4,7 +4,7 @@ use std::collections::HashMap;
 
 fn solve(p: &str, s: &str) {
     println!("Solving Day 03 - {}", s);
-    
+
     let contents = fs::read_to_string(&p)
         .expect("Should have been able to read the file");
 
@@ -17,7 +17,7 @@ fn solve(p: &str, s: &str) {
     }
 
     let mut score = 0;
-    let lines: Vec<&str> = contents.split("\n").map(|l| l.trim()).collect(); 
+    let lines: Vec<&str> = contents.split("\n").map(|l| l.trim()).collect();
     for l in lines.iter() {
         let part_1 = &l[0..l.len()/2];
         let part_2 = &l[l.len()/2..l.len() - 1];
@@ -36,7 +36,7 @@ fn solve(p: &str, s: &str) {
             score += score_map[c];
         }
     }
-    println!("Score 2 = {}", score);    
+    println!("Score 2 = {}", score);
 }
 
 pub fn solve_all() {

@@ -1,11 +1,11 @@
 use std::{fs, collections::HashMap};
 
 fn solve(p: &str, s: &str) {
-    println!("Solving Day 06 - {}", s);
-    
+    println!("Solving Day 08 - {}", s);
+
     let contents = fs::read_to_string(&p)
         .expect("Should have been able to read the file");
-    
+
     let mut trees: HashMap<(usize, usize), u32> = HashMap::new();
 
     let lines: Vec<&str> = contents.split('\n').map(|l| l.trim()).collect();
@@ -52,7 +52,7 @@ fn solve(p: &str, s: &str) {
                 if n == height - 1 {
                     met_edge = true;
                 }
-            }            
+            }
             for n in (0..i).rev() {
                 tree_dists[3] += 1;
                 if trees[&(n,j)] >= h {
@@ -65,7 +65,7 @@ fn solve(p: &str, s: &str) {
 
             if met_edge || i == 0 || i == width - 1 || j == 0 || j == height - 1 {
                 score_1 += 1;
-            }            
+            }
             score_2 = std::cmp::max(score_2, tree_dists.into_iter().reduce(|a,b| a*b).unwrap());
         }
     }
