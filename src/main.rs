@@ -9,6 +9,7 @@ pub mod day_05;
 pub mod day_06;
 pub mod day_07;
 pub mod day_08;
+pub mod day_09;
 
 fn main() {
     println!("Welcome to Advent of Code 2022");
@@ -17,7 +18,7 @@ fn main() {
     let mut day = 0;
     if args.len() == 2 {
         println!("Running only day {}", args[1]);
-        day = args[1].trim().parse().expect("Please type a number!");    
+        day = args[1].trim().parse().expect("Please type a number!");
         println!("----------");
     }
     else {
@@ -26,9 +27,9 @@ fn main() {
     }
 
     let days = [day_01::solve_all, day_02::solve_all, day_03::solve_all, day_04::solve_all,
-        day_05::solve_all, day_06::solve_all, day_07::solve_all, day_08::solve_all];
+        day_05::solve_all, day_06::solve_all, day_07::solve_all, day_08::solve_all, day_09::solve_all];
 
-    
+
     let mut d = 0;
     for f in days.iter() {
         d += 1;
@@ -43,7 +44,7 @@ fn main() {
         println!("----------");
     }
 
-    println!("Took {:.3}s for {} days [{:.3}s avg]", 
+    println!("Took {:.3}s for {} days [{:.3}s avg]",
         times.iter().sum::<f64>(),
         times.len(),
         times.iter().sum::<f64>() / times.len() as f64);
