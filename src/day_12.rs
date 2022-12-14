@@ -23,6 +23,12 @@ fn get_neighbors_id(v_id: i32, w: i32, h: i32) -> Vec<i32> {
     return n;
 }
 
+fn is_a(lines: &Vec<&str>, v_id: i32) -> bool {
+    let i = v_id % lines[0].len() as i32;
+    let j = v_id / lines[0].len() as i32;
+    return lines[j as usize].chars().nth(i as usize).unwrap() == 'a';
+}
+
 fn solve(p: &str, s: &str) {
     println!("Solving Day 12 - {}", s);
     let contents = fs::read_to_string(&p).expect("Should have been able to read the file");
@@ -38,7 +44,7 @@ fn solve(p: &str, s: &str) {
     elevation_table.insert('S', 0);
     elevation_table.insert('E', 25);
 
-    let mut end = 0;
+    let mut start = 0;
 
     let lines: Vec<&str> = contents.split("\n").map(|l| l.trim()).collect();
     let nb_nodes = lines.len() * lines[0].len();
@@ -47,39 +53,41 @@ fn solve(p: &str, s: &str) {
 
     for j in 0..lines.len() {
         for i in lines[j].char_indices() {
-            let mut e = i.1;
+            let e = i.1;
             let coord = (i.0 + j*lines[0].len()) as i32;
             vertices_to_view.insert(coord);
             if i.1 == 'S' {
-                dist[coord as usize] = 0;
-                e = 'a';
+                start = coord;
             }
             if i.1 == 'E' {
-                end = coord;
-                e = 'z';
+                dist[coord as usize] = 0;
             }
 
-            if j > 0 && elevation_table[&lines[j-1].chars().nth(i.0).unwrap()] <= elevation_table[&e] + 1 {
+            if j > 0 && elevation_table[&lines[j-1].chars().nth(i.0).unwrap()] >= elevation_table[&e] - 1 {
                 edges.insert((coord, (i.0 + (j-1)*lines[0].len()) as i32));
             }
-            if i.0 > 0 && elevation_table[&lines[j].chars().nth(i.0 - 1).unwrap()] <= elevation_table[&e] + 1 {
+            if i.0 > 0 && elevation_table[&lines[j].chars().nth(i.0 - 1).unwrap()] >= elevation_table[&e] - 1 {
                 edges.insert((coord, (i.0 - 1 + j*lines[0].len()) as i32));
             }
 
-            if i.0 + 1 < lines[0].len() && elevation_table[&lines[j].chars().nth(i.0 + 1).unwrap()] <= elevation_table[&e] + 1 {
+            if i.0 + 1 < lines[0].len() && elevation_table[&lines[j].chars().nth(i.0 + 1).unwrap()] >= elevation_table[&e] - 1 {
                 edges.insert((coord, (i.0 + 1 + j*lines[0].len()) as i32));
             }
 
-            if j + 1 < lines.len() && elevation_table[&lines[j+1].chars().nth(i.0).unwrap()] <= elevation_table[&e] + 1 {
+            if j + 1 < lines.len() && elevation_table[&lines[j+1].chars().nth(i.0).unwrap()] >= elevation_table[&e] - 1 {
                 edges.insert((coord, (i.0 + (j+1)*lines[0].len()) as i32));
             }
         }
     }
 
+    let mut best_a = std::i32::MAX;
     while !vertices_to_view.is_empty() {
         let v_id = find_shortest_v(&dist, &mut vertices_to_view);
-        if v_id == end {
+        if v_id == start {
             println!("Score 1 = {}", dist[v_id as usize]);
+        }
+        if is_a(&lines, v_id) && dist[v_id as usize] < best_a {
+            best_a = dist[v_id as usize];
         }
         let mut neighs = get_neighbors_id(v_id, lines[0].len() as i32, lines.len() as i32);
         neighs.retain(|x| vertices_to_view.contains(x) && edges.contains(&(v_id, *x)));
@@ -91,7 +99,7 @@ fn solve(p: &str, s: &str) {
             }
         }
     }
-
+    println!("Score 2 = {}", best_a);
 }
 
 pub fn solve_all() {
