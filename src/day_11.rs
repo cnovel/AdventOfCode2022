@@ -189,7 +189,7 @@ fn solve(p: &str, s: &str) {
         m.inspect_count = 0;
     }
 
-    for l in 0..10000 {
+    for _ in 0..10000 {
         let mut counts = Vec::new();
         for m in &monkeys {
             counts.push(m.inspect(&mut items, &monkeys));
